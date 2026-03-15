@@ -20,8 +20,7 @@ jobs:
           
           # التحقق إذا كان التعديل في مجلد POS والمستخدم ليس من فريق POS
           if echo "$CHANGED_FILES" | grep -q "custom_addons/pos_addons/"; then
-            if [[ "${{ github.actor }}" != "omardepaulisc-ui" && "${{ github.actor }}" != "omaragueroisc" && "${{ github.actor }}" != "ouiscbusiness-oss
-            " ]]; then
+            if [[ "${{ github.actor }}" != "omardepaulisc-ui" && "${{ github.actor }}" != "omaragueroisc" && "${{ github.actor }}" != "ouiscbusiness-oss" ]]; then            
               echo "::error::غير مصرح لك بتعديل موديولات فريق الـ POS!"
               exit 1
             fi
