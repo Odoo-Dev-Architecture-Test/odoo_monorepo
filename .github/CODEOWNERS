@@ -1,5 +1,5 @@
-# Retail Admins control retail_addons
-/custom_addons/retail_addons/* @[Odoo-Dev-Architecture-Test]/retail-admins
+# Retail Admins control retail_addons and ALL its sub-folders
+/custom_addons/retail_addons/ @Odoo-Dev-Architecture-Test/retail-admins
 
-# POS Admins control pos_addons
-/custom_addons/pos_addons/* @[Odoo-Dev-Architecture-Test]/pos-admins
+# POS Admins control pos_addons and ALL its sub-folders
+/custom_addons/pos_addons/ @Odoo-Dev-Architecture-Test/pos-admins
