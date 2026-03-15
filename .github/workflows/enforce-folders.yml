@@ -1,0 +1,35 @@
+name: Enforce Team Folders
+
+on:
+  pull_request:
+    branches: [ "dev" ]
+
+jobs:
+  check-permissions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check POS modifications
+        run: |
+          # الحصول على قائمة الملفات المعدلة
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }} ${{ github.sha }})
+          
+          # التحقق إذا كان التعديل في مجلد POS والمستخدم ليس من فريق POS
+          if echo "$CHANGED_FILES" | grep -q "custom_addons/pos_addons/"; then
+            if [[ "${{ github.actor }}" != "pos-dev-omar" && "${{ github.actor }}" != "pos-admin-omar" ]]; then
+              echo "::error::غير مصرح لك بتعديل موديولات فريق الـ POS!"
+              exit 1
+            fi
+          fi
+          
+          # التحقق إذا كان التعديل في مجلد Retail والمستخدم ليس من فريق Retail
+          if echo "$CHANGED_FILES" | grep -q "custom_addons/retail_addons/"; then
+            if [[ "${{ github.actor }}" != "retail-dev-omar" && "${{ github.actor }}" != "retail-admin-omar" ]]; then
+              echo "::error::غير مصرح لك بتعديل موديولات فريق الـ Retail!"
+              exit 1
+            fi
+          fi
